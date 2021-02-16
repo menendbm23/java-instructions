@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="ch_04_demos/src"/>
+	<classpathentry kind="src" path="ch01_FutureValueGUI/src"/>
+	<classpathentry kind="src" path="ch01_HelloWorld/src"/>
+	<classpathentry kind="src" path="ch01_Test/src"/>
+	<classpathentry kind="src" path="ch02_calculator/src"/>
+	<classpathentry kind="src" path="ch02_class_demo/src"/>
+	<classpathentry kind="src" path="ch02_ex1_Invoice/src"/>
+	<classpathentry kind="src" path="ch02_ex2_TestScore/src"/>
+	<classpathentry kind="src" path="ch02_ex3_Invoice/src"/>
+	<classpathentry kind="src" path="ch02_Invoice/src"/>
+	<classpathentry kind="src" path="ch03_class_demo/src"/>
+	<classpathentry kind="src" path="ch04_class_demo/src"/>
+	<classpathentry kind="src" path="ch06_ex1_Invoice/src"/>
+	<classpathentry kind="src" path="ch3_change_calculator/src"/>
+	<classpathentry kind="src" path="HangMan/src"/>
+	<classpathentry kind="src" path="SchoolRegistration/src"/>
+	<classpathentry kind="output" path="HangMan/bin"/>
+</classpath>
