@@ -4,13 +4,12 @@ public class PersonManagerApp {
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to the Person Manager");
-		Scanner sc = new Scanner(System.in);
+		
+		
 		String choice = "y";
-		
-		
 		while (choice.equalsIgnoreCase("y")) {
 		
-		
+		//get data from the user and create appropriate object based on user choice
 		String type = Console.getString("Create customer or employee? (c/e): ");
 		String firstName = Console.getString("First Name: ");
 		String lastName = Console.getString("Last name: ");
@@ -30,13 +29,12 @@ public class PersonManagerApp {
 				System.out.println("SSN: "+ssn+ "\n");
 			}
 			
-		System.out.println("Contine? (y/n): ");
-		choice = sc.next();
+		choice = Console.getString("Contine? (y/n): ");
+		System.out.println();
 			
 		}
 		
 		
-		System.out.println("Bye");
 	
 }
 
