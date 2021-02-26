@@ -9,10 +9,11 @@ import util.Console;
 
 import business.Movie;
 import db.DAO;
+import db.DAOUploadable;
 import db.MovieTextFile;
 
 public class BmdbConsoleApp {
-	private static DAO<Movie> movieDAO = new MovieTextFile();
+	private static DAOUploadable<Movie> movieDAO = new MovieTextFile();
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("Welcome to the Bootcamp Movie Database!!!");
@@ -21,9 +22,10 @@ public class BmdbConsoleApp {
 		while (!command.equalsIgnoreCase("exit")) {
 			System.out.println("Menu:");
 			System.out.println("show - show all movies");
-			System.out.println("add - add a movie");
-			System.out.println("get - get a movie by id");
-			System.out.println("del - delete a movie by id");
+			System.out.println("add  - add a movie");
+			System.out.println("get  - get a movie by id");
+			System.out.println("del  - delete a movie by id");
+			System.out.println("upl  - delete a movie by id");
 			System.out.println("exit - exit app");
 			
 			command = Console.getRequiredString("Command: ");
@@ -87,6 +89,12 @@ public class BmdbConsoleApp {
 				else {
 					System.out.println("Invalid movie id.");
 				}
+				break;
+			case "upload":
+				if (movieDAO.upload())
+					System.out.println("Uploade completed successfully!");
+				else
+					System.err.println("Error in movie upload....check console.");
 				break;
 			case "exit":
 				break;

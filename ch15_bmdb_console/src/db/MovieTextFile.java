@@ -14,8 +14,9 @@ import java.util.List;
 
 import business.Movie;
 
-public class MovieTextFile implements DAO<Movie> {
+public class MovieTextFile implements DAOUploadable<Movie> {
 	private static final String MOVIE_FILE_NAME = "movies.txt";
+	private static final String MOVIE_UPLOAD_FILE_NAME = "movie-upload.txt";
 	List<Movie> movies = new ArrayList<>();
 
 
@@ -110,6 +111,48 @@ public class MovieTextFile implements DAO<Movie> {
 	public boolean delete(Movie m) {
 		movies.remove(m);
 		return saveAll();
+	}
+	@Override
+	public boolean upload() {
+		boolean success = true; 
+		// read the upload file, adding each new movie to movies list
+		try {
+			BufferedReader in = new BufferedReader(
+								new FileReader(MOVIE_UPLOAD_FILE_NAME));
+			String line = in.readLine();
+			while (line != null) {
+				// this is ORM in core Java!
+				String[] fields = line.split("\t");
+				// after split we should have 5 fields per line 
+				String idStr = fields[0];
+				int id = Integer.parseInt(idStr);
+				String title = fields[1];
+				String rating = fields[2];
+				String yearStr = fields[3];
+				int year = Integer.parseInt(yearStr);
+				String director = fields[4];
+
+				Movie m = new Movie(id, title, rating, year, director);
+				movies.add(m);
+				
+				
+				//get the next line in the file 
+				line = in.readLine();
+				
+			}
+			in.close();
+		}
+		catch (Exception e) {
+			System.out.println("Error getting movie upload records from file.");
+			e.printStackTrace();
+			success = false;
+		}
+		// save all records to the file 
+		if (success) {
+			if (! saveAll())
+				success = false;
+		}
+		return success;
 	}
 
 }

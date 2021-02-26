@@ -17,37 +17,6 @@ public class PRSConsoleApp {
 	public static void main(String[] args) throws IOException {
 		System.out.println("Welcome to the PRS Console App!");
 		
-		String dirString = "c:/repos/java-instruction/prs-Console/src/";
-		Path dirPath = Paths.get(dirString);
-		
-		if (Files.notExists(dirPath)) {
-			Files.createDirectories(dirPath);
-			System.out.println("Directory Created");
-		}
-		else { 
-			System.out.println("Directory already exists");
-		}
-		String fileString = "USER.txt";
-		Path filePath = Paths.get(dirString, fileString);
-		if (Files.notExists(filePath)) {
-			Files.createFile(filePath);
-			System.out.println("File created");
-		}
-		else {
-			System.out.println("File already exists");
-		}
-		
-		if (Files.exists(dirPath) && Files.isDirectory(dirPath)) {
-			System.out.println("Directory: "+dirPath.toAbsolutePath());
-			System.out.println("Files");
-			DirectoryStream<Path> dirStream = Files.newDirectoryStream(dirPath);
-			for (Path p: dirStream) {
-				if(Files.isRegularFile(p)) {
-					System.out.println("      "+p.getFileName());
-				}
-			}
-		}
-		
 		int command = 0;
 		
 		while (!(command == 99)) {

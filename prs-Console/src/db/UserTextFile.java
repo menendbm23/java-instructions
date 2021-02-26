@@ -15,16 +15,17 @@ import business.User;
 
 public class UserTextFile implements DAO<User> {
 	private static final String USER_FILE_NAME = "USER.txt";
-	List<User> user = new ArrayList<>();
+	List<User> users = new ArrayList<>();
 	
 	public UserTextFile() {
+		// fill user list with users from text file 
 		getAll();
 	}
 	
 	@Override
 	public User getById(int id) {
 		User u = null;
-		for (User user: user) {
+		for (User user: users) {
 			if (user.getId()==id) {
 				u = user;
 			}
@@ -33,7 +34,7 @@ public class UserTextFile implements DAO<User> {
 	}
 	@Override
 	public List<User> getAll() {
-		if (user.size()==0) {
+		if (users.size()==0) {
 			try {
 				BufferedReader in = new BufferedReader(
 									new FileReader(USER_FILE_NAME));
@@ -42,20 +43,22 @@ public class UserTextFile implements DAO<User> {
 					String [] fields = line.split("\t");
 					String idStr = fields[0];
 					int id = Integer.parseInt(idStr);
-					String userName = fields[0];
-					String password = fields[1];
-					String firstName = fields[2];
-					String lastName = fields[3];
-					String phoneNumber = fields[4];
-					String email = fields[5];
-					boolean reviewer = fields[6] != null;
-					boolean admin = fields[7] != null;
+					String userName = fields[1];
+					String password = fields[2];
+					String firstName = fields[3];
+					String lastName = fields[4];
+					String phoneNumber = fields[5];
+					String email = fields[6];
+					String rvStr = fields[7];
+					boolean rv = Boolean.parseBoolean(rvStr);
+					String admStr = fields[8];
+					boolean adm = Boolean.parseBoolean(admStr);
 					
 					
 					User u = new User(id, userName, password, firstName, lastName, 
-							phoneNumber, email, reviewer, admin);
+							phoneNumber, email, rv, adm);
 					
-					user.add(u);
+					users.add(u);
 				
 					line = in.readLine();
 				}
@@ -66,11 +69,11 @@ public class UserTextFile implements DAO<User> {
 				e.printStackTrace();
 			}
 		}
-		return user;
+		return users;
 	}
 	@Override
-	public boolean add(User newUser) {
-		user.add(newUser);
+	public boolean add(User u) {
+		users.add(u);
 		return saveAll();
 	}
 	
@@ -82,13 +85,17 @@ public class UserTextFile implements DAO<User> {
 		try (PrintWriter out = new PrintWriter(
 						  new BufferedWriter(
 						  new FileWriter(usersFile)))) {
-			for (User u: user) {
-				out.println(u.getId()+"\t"+u.getUserName()+"\t"+u.getPassword()+
-						"\t"+u.getFirstName()+"\t"+u.getLastName()+"\t"+u.getPhoneNumber()
-						+"\t"+u.getEmail()+"\t"+u.isReviewer()+"\t"+u.isAdmin());
+			for (User u: users) {
+				out.print(u.getId()+"\t");
+				out.print(u.getUserName()+"\t");
+				out.print(u.getPassword()+"\t");
+				out.print(u.getFirstName()+"\t");
+				out.print(u.getLastName()+"\t");
+				out.print(u.getPhoneNumber()+"\t");
+				out.print(u.getEmail()+"\t");
+				out.print(u.isReviewer()+"\t");
+				out.println(u.isAdmin());
 			}
-			out.close();
-		
 		} catch (IOException e) {
 			success = false;
 			e.printStackTrace();
@@ -102,7 +109,7 @@ public class UserTextFile implements DAO<User> {
 	}
 	@Override
 	public boolean delete(User u) {
-		user.remove(u);
+		users.remove(u);
 		return saveAll();
 	}
 	
