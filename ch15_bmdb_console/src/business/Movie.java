@@ -6,6 +6,7 @@ public class Movie {
 	private String rating;
 	private int year;
 	private String director;
+	
 	public Movie(int id, String title, String rating, int year, String director) {
 		super();
 		this.id = id;
@@ -14,6 +15,15 @@ public class Movie {
 		this.year = year;
 		this.director = director;
 	}
+	
+	public Movie(String title, String rating, int year, String director) {
+		super();
+		this.title = title;
+		this.rating = rating;
+		this.year = year;
+		this.director = director;
+	}
+	
 	public Movie() {
 		super();
 	}
