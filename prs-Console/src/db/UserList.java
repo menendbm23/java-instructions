@@ -7,7 +7,7 @@ import business.User;
 
 public class UserList implements DAO<User> {
 	private List<User> users;
-	
+
 	public UserList() {
 		// initialize users to empty ArrayList
 		users = new ArrayList<>();

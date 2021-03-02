@@ -9,10 +9,10 @@ public class User {
 	private String lastName;
 	private String phoneNumber;
 	private String email;
-	private boolean admin;
 	private boolean reviewer;
+	private boolean admin;
 	public User(int id, String userName, String password, String firstName, String lastName, String phoneNumber,
-			String email, boolean admin, boolean reviewer) {
+			String email, boolean reviewer, boolean admin) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -21,8 +21,8 @@ public class User {
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
-		this.reviewer = admin;
-		this.admin = reviewer;
+		this.reviewer = reviewer;
+		this.admin = admin;
 	}
 	
 	public User() {

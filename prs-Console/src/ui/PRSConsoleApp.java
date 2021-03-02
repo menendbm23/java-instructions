@@ -3,16 +3,19 @@ package ui;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Arrays;
+import java.util.List;
 
 import business.User;
 import db.DAO;
+import db.UserDB;
 import db.UserList;
 import util.Console;
 
 import db.UserTextFile;
 
 public class PRSConsoleApp {
-	private static DAO<User> userDAO = new UserTextFile();
+	//private static DAO<User> userDAO = new UserTextFile();
+	private static DAO<User> userDAO = new UserDB();
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("Welcome to the PRS Console App!");
@@ -32,6 +35,7 @@ public class PRSConsoleApp {
 			System.out.println();
 			switch (command) {
 			case 1:
+				List<User> users = userDAO.getAll();
 				if (userDAO.getAll().size()==0) {
 					System.out.println("User list is null.. add some users!");
 				}
@@ -49,12 +53,12 @@ public class PRSConsoleApp {
 				String ln = Console.getRequiredString("LastName: ");
 				String pn = Console.getRequiredString("Phone Number: ");
 				String em = Console.getRequiredString("Email: ");
-				String adm = Console.getChoiceString("Admin? (y/n)", "y", "n");
 				String rvw = Console.getChoiceString("Reviewer? (y/n)", "y", "n");
-				boolean admin = (adm.equalsIgnoreCase("y")) ? true: false;
+				String adm = Console.getChoiceString("Admin? (y/n)", "y", "n");
 				boolean reviewer = (rvw.equalsIgnoreCase("y")) ? true: false;
+				boolean admin = (adm.equalsIgnoreCase("y")) ? true: false;
 				
-				User u = new User(id, un, pw, fn, ln, pn, em, admin, reviewer);
+				User u = new User(id, un, pw, fn, ln, pn, em, reviewer, admin);
 				userDAO.add(u);
 				System.out.println("User added!");
 				break;
