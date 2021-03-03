@@ -9,15 +9,18 @@ import java.util.List;
 import util.Console;
 import business.Actor;
 import business.Movie;
+import business.User;
 import db.ActorDB;
 import db.DAO;
 import db.DAOUploadable;
 import db.MovieDB;
 import db.MovieTextFile;
+import db.UserDB;
 
 public class BmdbConsoleApp {
 	private static DAOUploadable<Movie> movieDAO = new MovieDB();
 	private static DAOUploadable<Actor> actorDAO = new ActorDB();
+	private static UserDB userDB = new UserDB();
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("Welcome to the Bootcamp Movie Database!!!");
@@ -27,12 +30,13 @@ public class BmdbConsoleApp {
 			
 			command = Console.getRequiredString("movie or actor menu: ");
 			if (command.equals("movie")) {
-				System.out.println("show - show all movies");
-				System.out.println("add  - add a movie");
-				System.out.println("get  - get a movie by id");
-				System.out.println("del  - delete a movie by id");
-				System.out.println("upl  - upload new movies from upload file");
-				System.out.println("exit - exit app");
+				System.out.println("show  - show all movies");
+				System.out.println("add   - add a movie");
+				System.out.println("get   - get a movie by id");
+				System.out.println("del   - delete a movie by id");
+				System.out.println("upl   - upload new movies from upload file");
+				System.out.println("login - user login");
+				System.out.println("exit  - exit app");
 
 				command = Console.getRequiredString("Command: ");
 				switch (command) {
@@ -97,6 +101,20 @@ public class BmdbConsoleApp {
 					else
 						System.err.println("Error in movie upload....check console.");
 					break;
+				case "login":
+					System.out.println("User login:");
+					System.out.println("============");
+					String un = Console.getRequiredString("Username: ");
+					String pwd = Console.getRequiredString("Password: ");
+					User authenticatedUser = userDB.login(un, pwd);
+					if (authenticatedUser==null) {
+						System.out.println("Invalid login!");
+					}
+					else {
+						System.out.println("Successful login! Welcome, "
+								+authenticatedUser.getFirstName()+"!");
+					}
+					break;
 				case "exit":
 					break;
 				}
@@ -107,6 +125,7 @@ public class BmdbConsoleApp {
 				System.out.println("get  - get a actor by id");
 				System.out.println("del  - delete a actor by id");
 				System.out.println("upl  - upload new actors from upload file");
+				System.out.println("login - user login");
 				System.out.println("exit - exit app");
 
 				command = Console.getRequiredString("Command: ");
@@ -170,6 +189,20 @@ public class BmdbConsoleApp {
 						System.out.println("Upload completed successfully!");
 					else
 						System.err.println("Error in actor upload....check console.");
+					break;
+				case "login":
+					System.out.println("User login:");
+					System.out.println("============");
+					String un = Console.getRequiredString("Username: ");
+					String pwd = Console.getRequiredString("Password: ");
+					User authenticatedUser = userDB.login(un, pwd);
+					if (authenticatedUser==null) {
+						System.out.println("Invalid login!");
+					}
+					else {
+						System.out.println("Successful login! Welcome, "
+								+authenticatedUser.getFirstName()+"!");
+					}
 					break;
 				case "exit":
 					break;
