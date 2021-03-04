@@ -1,6 +1,6 @@
 package business;
 
-public interface TestContact {
+public interface TestContact<T> {
 	//p. 705
 	boolean test(Contact c);
 	
